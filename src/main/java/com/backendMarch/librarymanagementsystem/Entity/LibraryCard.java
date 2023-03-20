@@ -1,33 +1,32 @@
 package com.backendMarch.librarymanagementsystem.Entity;
 
 import com.backendMarch.librarymanagementsystem.Enum.CardStatus;
-import com.backendMarch.librarymanagementsystem.Enum.Department;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Student {
+public class LibraryCard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int cardNo;
 
-    private String name;
-
-    private int age;
+    private String validTill;
 
     @Enumerated(EnumType.STRING)
-    private Department department;
+    private CardStatus status;
 
-    private String email;
+    @OneToOne
+    @JoinColumn
+    Student student;
 
-    @OneToOne(mappedBy = "student",cascade = CascadeType.ALL)
-    LibraryCard card;
 }

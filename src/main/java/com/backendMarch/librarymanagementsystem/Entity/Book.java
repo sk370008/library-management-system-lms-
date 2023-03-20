@@ -1,7 +1,7 @@
 package com.backendMarch.librarymanagementsystem.Entity;
 
-import com.backendMarch.librarymanagementsystem.Enum.CardStatus;
-import com.backendMarch.librarymanagementsystem.Enum.Department;
+import com.backendMarch.librarymanagementsystem.Enum.Genre;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,21 +13,21 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Student {
+public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String name;
+    private String title;
 
-    private int age;
+    private int price;
 
     @Enumerated(EnumType.STRING)
-    private Department department;
+    private Genre genre;
 
-    private String email;
-
-    @OneToOne(mappedBy = "student",cascade = CascadeType.ALL)
-    LibraryCard card;
+    @ManyToOne
+    @JoinColumn
+    @JsonIgnore
+    Author author;
 }

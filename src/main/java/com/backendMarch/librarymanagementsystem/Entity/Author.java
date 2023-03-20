@@ -1,19 +1,20 @@
 package com.backendMarch.librarymanagementsystem.Entity;
 
-import com.backendMarch.librarymanagementsystem.Enum.CardStatus;
-import com.backendMarch.librarymanagementsystem.Enum.Department;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Student {
+public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +24,10 @@ public class Student {
 
     private int age;
 
-    @Enumerated(EnumType.STRING)
-    private Department department;
+    private String mobNo;
 
     private String email;
 
-    @OneToOne(mappedBy = "student",cascade = CascadeType.ALL)
-    LibraryCard card;
+    @OneToMany(mappedBy = "author",cascade = CascadeType.ALL)
+    List<Book> books = new ArrayList<>();
 }
