@@ -97,7 +97,7 @@ public class TransactionService {
 
 
         //To send an email
-        String text = "Congrats!!! " + card.getStudent().getName()+ "You have been issued" + book.getTitle() + " book";
+        String text = "Congrats!!! " + card.getStudent().getName()+ " You have been issued " + book.getTitle() + " book";
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("backendavengers2@gmail.com");
