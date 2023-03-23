@@ -1,5 +1,7 @@
 package com.backendMarch.librarymanagementsystem.Controller;
 
+import com.backendMarch.librarymanagementsystem.DTO.AuthorRequestDto;
+import com.backendMarch.librarymanagementsystem.DTO.AuthorResponseDto;
 import com.backendMarch.librarymanagementsystem.Entity.Author;
 import com.backendMarch.librarymanagementsystem.Service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +16,17 @@ public class AuthorController {
     @Autowired
     AuthorService authorService;
 
-    //H.W :- Change to DTO
+
+//    @PostMapping("/add")
+//    public String addAuthor(@RequestBody Author author){
+//        authorService.addAuthor(author);
+//        return "Author added successfully";
+//    }
+
+    //H.W :- Change to DTO(Done)
     @PostMapping("/add")
-    public String addAuthor(@RequestBody Author author){
-        authorService.addAuthor(author);
-        return "Author added successfully";
+    public AuthorResponseDto addAuthor(@RequestBody AuthorRequestDto authorRequestDto){
+        return authorService.addAuthor(authorRequestDto);
     }
 
     @GetMapping("/get_authors")
