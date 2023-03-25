@@ -1,5 +1,6 @@
 package com.backendMarch.librarymanagementsystem.Controller;
 
+import com.backendMarch.librarymanagementsystem.DTO.AuthorListResponseDto;
 import com.backendMarch.librarymanagementsystem.DTO.AuthorRequestDto;
 import com.backendMarch.librarymanagementsystem.DTO.AuthorResponseDto;
 import com.backendMarch.librarymanagementsystem.Entity.Author;
@@ -23,14 +24,13 @@ public class AuthorController {
 //        return "Author added successfully";
 //    }
 
-    //H.W :- Change to DTO(Done)
     @PostMapping("/add")
     public AuthorResponseDto addAuthor(@RequestBody AuthorRequestDto authorRequestDto){
         return authorService.addAuthor(authorRequestDto);
     }
 
     @GetMapping("/get_authors")
-    public List<Author> getAuthors(){
+    public List<AuthorListResponseDto> getAuthors(){
         return authorService.getAuthors();
     }
 }

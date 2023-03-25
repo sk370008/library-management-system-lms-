@@ -2,6 +2,7 @@ package com.backendMarch.librarymanagementsystem.Service;
 
 import com.backendMarch.librarymanagementsystem.DTO.IssueBookRequestDto;
 import com.backendMarch.librarymanagementsystem.DTO.IssueBookResponseDto;
+import com.backendMarch.librarymanagementsystem.DTO.TransactionResponseDto;
 import com.backendMarch.librarymanagementsystem.Entity.Book;
 import com.backendMarch.librarymanagementsystem.Entity.LibraryCard;
 import com.backendMarch.librarymanagementsystem.Entity.Transaction;
@@ -15,6 +16,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -110,14 +112,21 @@ public class TransactionService {
 
     }
 
-    public String getAllTxns(int cardId) {
+    public List<TransactionResponseDto> getAllTxns(int cardId) {
         List<Transaction> transactionList = transactionRepository.getAllSuccessfulTransactionsWithCardNo(cardId);
-        String ans = "";
-        for (Transaction t : transactionList){
-            ans += t.getTransactionNumber();
-            ans += "\n";
+
+        List<TransactionResponseDto> transactionResponseDtos = new ArrayList<>();
+        for (Transaction t: transactionList){
+            TransactionResponseDto transactionResponseDto = new TransactionResponseDto();
+            transactionResponseDto.setTransactionNumber(t.getTransactionNumber());
+            transactionResponseDto.setTransactionDate(t.getTransactionDate());
+            transactionResponseDto.setTransactionStatus(t.getTransactionStatus());
+            transactionResponseDto.setMessage(t.getMessage());
+            transactionResponseDto.setIssueOperation(true);
+
+            transactionResponseDtos.add(transactionResponseDto);
         }
 
-        return ans;
+        return transactionResponseDtos;
     }
 }

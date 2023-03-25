@@ -1,5 +1,6 @@
 package com.backendMarch.librarymanagementsystem.Service;
 
+import com.backendMarch.librarymanagementsystem.DTO.AuthorListResponseDto;
 import com.backendMarch.librarymanagementsystem.DTO.AuthorRequestDto;
 import com.backendMarch.librarymanagementsystem.DTO.AuthorResponseDto;
 import com.backendMarch.librarymanagementsystem.Entity.Author;
@@ -7,6 +8,7 @@ import com.backendMarch.librarymanagementsystem.Repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,7 +36,22 @@ public class AuthorService {
         return authorResponseDto;
     }
 
-    public List<Author> getAuthors() {
-        return authorRepository.findAll();
+    public List<AuthorListResponseDto> getAuthors() {
+        List<Author> authors = authorRepository.findAll();
+
+        List<AuthorListResponseDto> listResponseDtos = new ArrayList<>();
+
+        for(Author author :authors){
+            AuthorListResponseDto authorListResponseDto = new AuthorListResponseDto();
+            authorListResponseDto.setName(author.getName());
+            authorListResponseDto.setAge(author.getAge());
+            authorListResponseDto.setMobNo(author.getMobNo());
+            authorListResponseDto.setEmail(author.getEmail());
+            listResponseDtos.add(authorListResponseDto);
+        }
+
+        return listResponseDtos;
+
+
     }
 }
