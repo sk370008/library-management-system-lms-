@@ -13,7 +13,7 @@ Maven 3.6 or later
 MySQL 8.0 or later
 
 Steps:-
-1)Clone the repository
+1)Clone the repository<br/>
 2)Navigate to the project directory
 3)Update the database configuration in the application.properties file
 4)Build the project
